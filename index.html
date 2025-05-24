@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saola Rental | Rent Anything, Anytime in Vietnam</title>
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        /* Header */
+        header {
+            background-color: #FF6B00;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo-text {
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+        }
+        
+        .search-bar {
+            flex-grow: 1;
+            display: flex;
+            margin: 0 20px;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+        }
+        
+        .search-bar button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        
+        .user-actions {
+            display: flex;
+        }
+        
+        .user-actions a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        /* Main Content */
+        .main-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+        
+        /* Banner */
+        .banner {
+            height: 300px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .banner-text {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+            padding: 20px;
+        }
+        
+        /* Categories */
+        .categories {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .categories h2 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+        }
+        
+        .category-item {
+            text-align: center;
+            padding: 10px;
+            border-radius: 4px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .category-item:hover {
+            background-color: #f9f9f9;
+            transform: translateY(-3px);
+        }
+        
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #FF6B00;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+        
+        /* Featured Items */
+        .featured {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .section-header h2 {
+            font-size: 18px;
+            color: #333;
+        }
+        
+        .section-header a {
+            color: #FF6B00;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .item-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        
+        .item-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            background: white;
+        }
+        
+        .item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .item-image {
+            height: 180px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .item-card:hover .item-image img {
+            transform: scale(1.05);
+        }
+        
+        .item-details {
+            padding: 15px;
+        }
+        
+        .item-title {
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            min-height: 40px;
+        }
+        
+        .item-price {
+            color: #FF6B00;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        
+        .item-location {
+            font-size: 12px;
+            color: #666;
+            display: flex;
+            align-items: center;
+        }
+        
+        .item-location i {
+            margin-right: 5px;
+            color: #FF6B00;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 0;
+            margin-top: 30px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            padding: 0 15px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #444;
+            font-size: 13px;
+            color: #999;
+        }
+    </style>
+    <!-- Thêm Font Awesome cho icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <!-- Logo Sao La - Thay bằng link hình của bạn -->
+                <img src="file:///C:/Users/84396/Downloads/5a43e927-5cc5-4783-9717-6a495cac8909.png" alt="Saola Logo">
+                <div class="logo-text">SAOLA RENTAL</div>
+            </div>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search for cameras, dresses, tools...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="user-actions">
+                <a href="#"><i class="fas fa-upload"></i> Become an Owner</a>
+                <a href="#"><i class="fas fa-user"></i> Log In</a>
+                <a href="#"><i class="fas fa-user-plus"></i> Sign Up</a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Banner -->
+        <div class="banner">
+            <!-- Thay bằng banner của bạn -->
+            <img src="https://www.ormsdirect.co.za/cdn/shop/collections/gopro-main-banner.jpg?v=1679036721&width=1800" alt="Rent Everything">
+            <div class="banner-text">
+                <h2>Rent Quality Items, Save Money & The Planet</h2>
+                <p>Join Vietnam's leading rental marketplace</p>
+            </div>
+        </div>
+        
+        <!-- Categories -->
+        <div class="categories">
+            <h2>Popular Categories</h2>
+            <div class="category-grid">
+                <div class="category-item">
+                    <div class="category-icon"><i class="fas fa-camera"></i></div>
+                    <div>Cameras</div>
+                </div>
+                <div class="category-item">
+                    <div class="category-icon"><i class="fas fa-tshirt"></i></div>
+                    <div>Fashion</div>
+                </div>
+                <div class="category-item">
+                    <div class="category-icon"><i class="fas fa-tools"></i></div>
+                    <div>Tools</div>
+                </div>
+                <div class="category-item">
+                    <div class="category-icon"><i class="fas fa-laptop"></i></div>
+                    <div>Electronics</div>
+                </div>
+                <div class="category-item">
+                    <div class="category-icon"><i class="fas fa-campground"></i></div>
+                    <div>Outdoor</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Featured Items -->
+        <div class="featured">
+            <div class="section-header">
+                <h2>Featured Rentals</h2>
+                <a href="#">See All <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="item-grid">
+                <!-- Item 1 -->
+                <div class="item-card">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Camera">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-title">Canon EOS R5 Mirrorless Camera with 24-105mm Lens</div>
+                        <div class="item-price">$25/day</div>
+                        <div class="item-location"><i class="fas fa-map-marker-alt"></i> Hanoi • 2km away</div>
+                    </div>
+                </div>
+                
+                <!-- Item 2 -->
+                <div class="item-card">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1539533018447-63fcce2678e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Dress">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-title">Evening Gown for Special Events (Size M-L)</div>
+                        <div class="item-price">$15/day</div>
+                        <div class="item-location"><i class="fas fa-map-marker-alt"></i> Ho Chi Minh • 5km away</div>
+                    </div>
+                </div>
+                
+                <!-- Item 3 -->
+                <div class="item-card">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1579829366248-204fe8413f31?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Drone">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-title">DJI Mavic 3 Pro Drone with 4K Camera</div>
+                        <div class="item-price">$40/day</div>
+                        <div class="item-location"><i class="fas fa-map-marker-alt"></i> Hanoi • 3km away</div>
+                    </div>
+                </div>
+                
+                <!-- Item 4 -->
+                <div class="item-card">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Tent">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-title">4-Person Camping Tent with Rainfly</div>
+                        <div class="item-price">$12/day</div>
+                        <div class="item-location"><i class="fas fa-map-marker-alt"></i> Da Nang • 8km away</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recently Added -->
+        <div class="featured">
+            <div class="section-header">
+                <h2>Recently Added</h2>
+                <a href="#">See All <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="item-grid">
+                <!-- Item 1 -->
+                <div class="item-card">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Makeup Kit">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-title">Professional Makeup Kit (50+ pieces)</div>
+                        <div class="item-price">$18/day</div>
+                        <div class="item-location"><i class="fas fa-map-marker-alt"></i> Hanoi • 1km away</div>
+                    </div>
+                </div>
+                
+                <!-- Item 2 -->
+                <div class="item-card">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1571275178570-8a6c63f6b0a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Mixer">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-title">KitchenAid Stand Mixer for Baking</div>
+                        <div class="item-price">$10/day</div>
+                        <div class="item-location"><i class="fas fa-map-marker-alt"></i> Ho Chi Minh • 4km away</div>
+                    </div>
+                </div>
+                
+                <!-- Item 3 -->
+                <div class="item-card">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1624913503273-6965d1860c05?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="GoPro">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-title">GoPro Hero 11 Black with Accessories</div>
+                        <div class="item-price">$20/day</div>
+                        <div class="item-location"><i class="fas fa-map-marker-alt"></i> Hanoi • 2km away</div>
+                    </div>
+                </div>
+                
+                <!-- Item 4 -->
+                <div class="item-card">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Projector">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-title">HD Projector for Movie Nights (120")</div>
+                        <div class="item-price">$15/day</div>
+                        <div class="item-location"><i class="fas fa-map-marker-alt"></i> Da Nang • 6km away</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Saola Rental</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>For Renters</h3>
+                <ul>
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">Trust & Safety</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>For Owners</h3>
+                <ul>
+                    <li><a href="#">List Your Items</a></li>
+                    <li><a href="#">Owner Protection</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Resources</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><a href="mailto:support@saolarental.com"><i class="fas fa-envelope"></i> support@saolarental.com</a></li>
+                    <li><a href="tel:+84123456789"><i class="fas fa-phone"></i> +84 123 456 789</a></li>
+                    <li><a href="#"><i class="fas fa-handshake"></i> Partnerships</a></li>
+                </ul>
+            </div>
+        </div> 
+        
+        <div class="copyright">
+            &copy; 2023 Saola Rental. Promoting sustainable consumption in Vietnam.
+        </div>
+    </footer>
+</body>
+</html>
